@@ -1,0 +1,17 @@
+<div class="text-center margins" >
+  <div>
+    <h3 class="text-center">Message Details</h3>
+    <form [formGroup]="messageDetailsForm" (ngSubmit)="send(messageDetailsForm)">
+      <mat-form-field class="col-sm-12">
+        <input matInput placeholder="Enter the body of the message" formControlName="body">
+      </mat-form-field>
+      <mat-form-field class="col-sm-12">
+        <input matInput type="number" placeholder="Enter the mobile number" formControlName="to">
+      </mat-form-field>
+      <div class="col-sm-12 text-center">
+        <button mat-button type="submit" [disabled]="!messageDetailsForm.valid">Send</button>
+      </div>
+    </form>
+    <div class="clearfix"></div>
+  </div>
+</div>

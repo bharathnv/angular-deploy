@@ -1,0 +1,16 @@
+<mat-toolbar color="primary">
+  <span>Assignment</span>
+
+  <!-- This fills the remaining space of the current row -->
+  <span class="example-fill-remaining-space"></span>
+  <span>Signed IN: {{user.email}}</span>
+  <span>
+    <button mat-button [matMenuTriggerFor]="menu"><i class="material-icons">view_headline</i></button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="deleteAccount()">Delete Account</button>
+      <button mat-menu-item (click)="logoutUser()">Logout</button>
+    </mat-menu>
+  </span>
+</mat-toolbar>
+<button mat-button class="col-sm-12" (click)="sendSMS()">Send Message</button>
+<button mat-button class="col-sm-12" (click)="makeCall()">Make Call</button>

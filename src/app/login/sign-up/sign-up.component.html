@@ -1,0 +1,21 @@
+<div class="col-sm-6 text-center margins">
+  <mat-card>
+    <h3 class="text-center">Assignment</h3>
+    <form [formGroup]="signUpForm" (ngSubmit)="signUp(signUpForm)">
+      <mat-form-field class="col-sm-12">
+        <input matInput placeholder="Enter user name" formControlName="username">
+      </mat-form-field>
+      <mat-form-field class="col-sm-12">
+        <input matInput type="password" placeholder="Enter password" formControlName="password">
+      </mat-form-field>
+      <mat-form-field class="col-sm-12">
+        <input matInput type="password" placeholder="Confirm password" formControlName="confirmPassword">
+      </mat-form-field>
+      <div class="col-sm-12 text-center">
+        <button mat-button routerLink="/login/">Login</button>
+        <button mat-button type="submit" [disabled]="!signUpForm.valid">Sign-Up</button>
+      </div>
+    </form>
+    <div class="clearfix"></div>
+  </mat-card>
+</div>
