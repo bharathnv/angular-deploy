@@ -36,7 +36,8 @@
     "scmp": "^2.0.0",
     "twilio-chat": "^3.1.0",
     "typescript": "~3.1.1",
-    "zone.js": "~0.8.26"
+    "zone.js": "~0.8.26",
+	"typescript": "~3.1.1"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.10.0",
