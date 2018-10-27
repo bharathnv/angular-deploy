@@ -23,7 +23,7 @@ export class CallDialogComponent implements OnInit {
     private restService: RestService,
     private commonService: CommonService) {
       this.callDetailsForm = this.formBuilder.group({
-        url: ['', Validators.required],
+        // url: ['', Validators.required],
         to: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]]
       });
     }
