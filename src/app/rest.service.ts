@@ -15,7 +15,8 @@ import { Observable, Subject } from 'rxjs';
 })
 export class RestService {
 
-  private apiUrl = 'http://localhost:8081';
+  //private apiUrl = 'http://localhost:8081';
+  private apiUrl = 'https://assignment-backend-node.herokuapp.com/';
 
   constructor(private http: Http) { }
 
