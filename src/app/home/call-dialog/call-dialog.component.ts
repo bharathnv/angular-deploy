@@ -33,7 +33,7 @@ export class CallDialogComponent implements OnInit {
 
   makeCall(call: any) {
     if (call.valid === true) {
-      this.callDetails.url = call.controls['url'].value;
+      // this.callDetails.url = call.controls['url'].value;
       this.callDetails.to = call.controls['to'].value;
       this.restService.makeCall(this.callDetails).subscribe((data) => {
         this.commonService.openSnackBar('Called successfully', '');
