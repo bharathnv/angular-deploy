@@ -12,5 +12,88 @@
     </mat-menu>
   </span>
 </mat-toolbar>
-<button mat-button class="col-sm-12" (click)="sendSMS()">Send Message</button>
-<button mat-button class="col-sm-12" (click)="makeCall()">Make Call</button>
+<div class="clearfix"></div>
+<div>
+  <div class="m15">
+    <div class="col-sm-12 setup" *ngIf="!isUserDetailsSet">
+      <h4>Please setup your twilio account and provide us your Account Sid and Auth Token. Steps to setup twilio
+        account is as follows:</h4>
+      <ul>
+        <li>Hit the url https://www.twilio.com/ in your browser or <a href="https://www.twilio.com/" target="_blank">Click Here</a></li>
+        <li>If you have twilio account login proving your username and password</li>
+        <li>If you dont have twilio acoount then sign up by providing necessary details.</li>
+        <li>After that you would get mail in registered email which contains link to verify your account.</li>
+        <li>Click on the link to verify you account and login</li>
+        <li>After that create your project by chhosing the required template.</li>
+        <li>After creating the project you would get Account Sid and Auth Token.</li>
+      </ul>
+    </div>
+    <div class="col-sm-12 dot-border setup-form" *ngIf="!isUserDetailsSet">
+      <form [formGroup]="userAccountDetailsForm" class="m15" (ngSubmit)="setAccountSidAndAuthToken(userAccountDetailsForm)">
+        <mat-form-field class="col-sm-12">
+          <input matInput placeholder="Enter Account SID" formControlName="accountSid">
+        </mat-form-field>
+        <mat-form-field class="col-sm-12">
+          <input matInput type="password" placeholder="Enter Auth Token" formControlName="authToken">
+        </mat-form-field>
+        <div class="col-sm-12 text-center">
+          <button mat-button type="submit" [disabled]="!userAccountDetailsForm.valid">Update Details</button>
+        </div>
+      </form>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+  <div *ngIf="isUserDetailsSet">
+    <div class="col-sm-12 note text-center" *ngIf="isShowNote">
+      <h4>NOTE: Please add phone numbers to your verified list before sending messages or making call <i class="far fa-window-close pull-right pointer" (click)="closeNote()"></i></h4>
+    </div>
+    <div class="col-sm-12">
+      <div class="col-sm-6 relative">
+        <mat-card class="m15 screen">
+          <div class="col-sm-12">
+            <i class="fas fa-comment icon-message"></i>
+          </div>
+          <div class="clearfix"></div>
+          <div class="m10-top info">
+            <h4>Delivery of the message depends on:</h4>
+            <ul>
+              <li>Whether the number is listed in verified list or not.</li>
+              <li>Twilio service guarantees messages delivery of messages to those numbers in which roaming service is
+                activated and network is available</li>
+              <li>If any of the messages fails to reach the destination phone number then you can find information
+                about
+                those messages in the notification of the twilio's account after logging in.</li>
+            </ul>
+          </div>
+          <div class="absolute col-sm-12 m10-top">
+            <button mat-button class="col-sm-12 row" (click)="sendSMS()">Send Message</button>
+          </div>
+        </mat-card>
+        <div class="clearfix"></div>
+      </div>
+      <div class="col-sm-6 relative">
+        <mat-card class="m15 screen">
+          <div class="col-sm-12">
+            <i class="fas fa-phone-volume icon"></i>
+          </div>
+          <div class="clearfix"></div>
+          <div class="m10-top info">
+            <h4>Getting calls on phone numbers depends on:</h4>
+            <ul>
+              <li>Whether the number is listed in verified list or not.</li>
+              <li>You can define your own message which you want to deliver to user through voice. For this we have to
+                use twiMl. We have to define our own api which will return twiML. Depending on that call will be
+                carried out.</li>
+              <li>If any of the call fails to reach the destination phone number then you can find information about
+                those calls in the notification of the twilio's account after logging in.</li>
+            </ul>
+          </div>
+          <div class="absolute col-sm-12 m10-top">
+            <button mat-button class="col-sm-12 row" (click)="makeCall()">Make Call</button>
+          </div>
+        </mat-card>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -14,7 +14,9 @@ export class MessageDetailsComponent implements OnInit {
   public messageDetailsForm: FormGroup;
   public messageDetails = {
     body: '',
-    to: ''
+    to: '',
+    accountSid: '',
+    authToken: ''
   };
 
   constructor(private dialogRef: MatDialogRef<MessageDetailsComponent>,
@@ -26,6 +28,8 @@ export class MessageDetailsComponent implements OnInit {
       body: ['', Validators.required],
       to: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]]
     });
+    this.messageDetails.accountSid = localStorage.getItem('accountSid');
+    this.messageDetails.authToken = localStorage.getItem('authToken');
   }
 
   ngOnInit() {
@@ -38,6 +42,8 @@ export class MessageDetailsComponent implements OnInit {
       this.restService.sendMessage(this.messageDetails).subscribe((data) => {
         this.commonService.openSnackBar('Message sent successfully', '');
         this.dialogRef.close();
+      }, (error) => {
+        this.commonService.openSnackBar('Error occured ' + error, '');
       });
     } else {
       this.commonService.openSnackBar('Details are not correct', '');

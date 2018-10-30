@@ -12,7 +12,6 @@
   },
   "dependencies": {
     "@angular-devkit/build-angular": "~0.10.0",
-    "@angular/compiler-cli": "~7.0.0",
     "@angular/animations": "^7.0.0",
     "@angular/cdk": "^7.0.1",
     "@angular/cli": "~7.0.2",
@@ -26,6 +25,7 @@
     "@angular/platform-browser": "~7.0.0",
     "@angular/platform-browser-dynamic": "~7.0.0",
     "@angular/router": "~7.0.0",
+    "angular-font-awesome": "^3.1.2",
     "core-js": "^2.5.4",
     "crypto": "^1.0.1",
     "express": "^4.16.4",
@@ -36,8 +36,7 @@
     "scmp": "^2.0.0",
     "twilio-chat": "^3.1.0",
     "typescript": "~3.1.1",
-    "zone.js": "~0.8.26",
-	"typescript": "~3.1.1"
+    "zone.js": "~0.8.26"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.10.0",

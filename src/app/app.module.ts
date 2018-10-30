@@ -49,5 +49,6 @@ export class AppModule {
       storageBucket: 'assignmentangular.appspot.com',
       messagingSenderId: '233225220103'
     });
+    firebase.database();
   }
 }

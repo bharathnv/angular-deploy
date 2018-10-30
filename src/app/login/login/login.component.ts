@@ -36,7 +36,6 @@ export class LoginComponent implements OnInit {
         if (user) {
           localStorage.setItem('user', JSON.stringify(user));
           this.router.navigate(['/home/']);
-        } else {
         }
       });
     }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material';
 import { Router } from '@angular/router';
 
@@ -16,18 +17,30 @@ import { CallDialogComponent } from '../call-dialog/call-dialog.component';
 export class HomeComponent implements OnInit {
 
   public user: any;
+  public databaseRef: any;
+  public userDetailsRef: any;
+  public userAccountDetailsForm: FormGroup;
+  public isUserDetailsSet = false;
+  public isShowNote = true;
 
   constructor(private router: Router,
     private commonService: CommonService,
-    private dialog: MatDialog) {
+    private dialog: MatDialog,
+    private formBuilder: FormBuilder) {
     this.user = JSON.parse(localStorage.getItem('user'));
     if (this.user === null) {
       this.router.navigate(['/login']);
       return;
     }
+    this.setUserDetails(this);
+    this.userAccountDetailsForm = this.formBuilder.group({
+      accountSid: ['', Validators.required],
+      authToken: ['', Validators.required]
+    });
   }
 
   ngOnInit() {
+    this.databaseRef = firebase.database().ref('userDetails/');
   }
 
   deleteAccount() {
@@ -59,7 +72,7 @@ export class HomeComponent implements OnInit {
       data: ''
     });
 
-    dialogRef.afterClosed().subscribe((data) => {});
+    dialogRef.afterClosed().subscribe((data) => { });
   }
 
   makeCall() {
@@ -68,6 +81,38 @@ export class HomeComponent implements OnInit {
       data: ''
     });
 
-    dialogRef.afterClosed().subscribe((data) => {});
+    dialogRef.afterClosed().subscribe((data) => { });
+  }
+
+  setAccountSidAndAuthToken(userAccountDetailsForm: any) {
+    if (userAccountDetailsForm.valid === true) {
+      const accountSidLocal = userAccountDetailsForm.controls['accountSid'].value;
+      const authTokenLocal = userAccountDetailsForm.controls['authToken'].value;
+      const that = this;
+      let obj = {};
+      obj[this.user.uid] = {
+        accountSid: accountSidLocal,
+        authToken: authTokenLocal
+      };
+      this.databaseRef.set({
+        obj
+      }).then((data) => {
+        that.setUserDetails(that);
+      });
+    }
+  }
+
+  setUserDetails(that: any) {
+    firebase.database().ref('userDetails').child('obj/' + that.user.uid).once('value').then((snapshot) => {
+      if (snapshot.val() !== null) {
+        that.isUserDetailsSet = true;
+        localStorage.setItem('accountSid', snapshot.val().accountSid);
+        localStorage.setItem('authToken', snapshot.val().authToken);
+      }
+    });
+  }
+
+  closeNote() {
+    this.isShowNote = false;
   }
 }

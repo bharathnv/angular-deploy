@@ -2,9 +2,6 @@
   <div>
     <h3 class="text-center">Call Details</h3>
     <form [formGroup]="callDetailsForm" (ngSubmit)="makeCall(callDetailsForm)">
-      <!-- <mat-form-field class="col-sm-12">
-        <input matInput placeholder="Enter the url for call back" formControlName="url">
-      </mat-form-field> -->
       <mat-form-field class="col-sm-12">
         <input matInput type="number" placeholder="Enter the mobile number" formControlName="to">
       </mat-form-field>

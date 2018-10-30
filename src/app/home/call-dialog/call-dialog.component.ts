@@ -14,7 +14,9 @@ export class CallDialogComponent implements OnInit {
   public callDetailsForm: FormGroup;
   public callDetails = {
     url: '',
-    to: ''
+    to: '',
+    accountSid: '',
+    authToken: ''
   };
 
   constructor(private dialogRef: MatDialogRef<CallDialogComponent>,
@@ -22,22 +24,24 @@ export class CallDialogComponent implements OnInit {
     private formBuilder: FormBuilder,
     private restService: RestService,
     private commonService: CommonService) {
-      this.callDetailsForm = this.formBuilder.group({
-        // url: ['', Validators.required],
-        to: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]]
-      });
-    }
+    this.callDetailsForm = this.formBuilder.group({
+      to: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]]
+    });
+    this.callDetails.accountSid = localStorage.getItem('accountSid');
+    this.callDetails.authToken = localStorage.getItem('authToken');
+  }
 
   ngOnInit() {
   }
 
   makeCall(call: any) {
     if (call.valid === true) {
-      // this.callDetails.url = call.controls['url'].value;
       this.callDetails.to = call.controls['to'].value;
       this.restService.makeCall(this.callDetails).subscribe((data) => {
         this.commonService.openSnackBar('Called successfully', '');
         this.dialogRef.close();
+      }, (error) => {
+        this.commonService.openSnackBar('Error occured ' + error, '');
       });
     } else {
       this.commonService.openSnackBar('Details are not correct', '');
