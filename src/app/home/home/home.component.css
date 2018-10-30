@@ -23,7 +23,7 @@
     color: beige;
     margin-left: 10%;
     width: 80%;
-    padding: auto;
+    padding: 20px;
 }
 
 .screen {
@@ -73,7 +73,7 @@
     color: beige;
     margin-left: 5%;
     width: 90%;
-    padding: auto;
+    padding: 15px;
 }
 
 .setup-form{
