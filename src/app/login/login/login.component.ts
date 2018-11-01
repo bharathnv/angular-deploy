@@ -11,12 +11,19 @@ import { CommonService } from '../../common.service';
 })
 export class LoginComponent implements OnInit {
   public loginForm: FormGroup;
+  public signUpForm: FormGroup;
   constructor(private formBuilder: FormBuilder,
     private router: Router,
     private commonService: CommonService) {
     this.loginForm = this.formBuilder.group({
       username: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
+    });
+
+    this.signUpForm = this.formBuilder.group({
+      username: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required],
+      confirmPassword: ['', Validators.required]
     });
   }
 
@@ -38,6 +45,21 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['/home/']);
         }
       });
+    }
+  }
+
+  signUp(form: any) {
+    if (form.valid) {
+      if (form.controls['password'].value === form.controls['confirmPassword'].value) {
+        firebase.auth().createUserWithEmailAndPassword(form.controls['username'].value, form.controls['password'].value)
+        .finally(() => {
+          this.commonService.openSnackBar('Registered Successfully', '');
+          this.signUpForm.reset();
+        })
+        .catch((error) => {
+          this.commonService.openSnackBar('Some error occured, code: ' + error.code + ' message:' + error.message, '');
+        });
+      }
     }
   }
 

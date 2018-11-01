@@ -1,18 +1,38 @@
-<div class="col-sm-6 text-center margins" >
+<div class="margins">
   <mat-card>
-    <h3 class="text-center">Assignment</h3>
-    <form [formGroup]="loginForm" (ngSubmit)="login(loginForm)">
-      <mat-form-field class="col-sm-12">
-        <input matInput placeholder="Enter your email" formControlName="username">
-      </mat-form-field>
-      <mat-form-field class="col-sm-12">
-        <input matInput type="password" placeholder="Enter password" formControlName="password">
-      </mat-form-field>
-      <div class="col-sm-12 text-center">
-        <button mat-button type="submit" [disabled]="!loginForm.valid">Login</button>
-        <button mat-button routerLink="/login/signup">Sign Up</button>
+    <h3 class="text-center color p25">Assignment</h3>
+    <hr />
+    <div class="p25">
+      <div class="col-sm-6 vertical-right">
+        <form [formGroup]="signUpForm" (ngSubmit)="signUp(signUpForm)">
+          <mat-form-field class="col-sm-12" appearance="fill">
+            <input matInput placeholder="Enter your email" formControlName="username">
+          </mat-form-field>
+          <mat-form-field class="col-sm-12" appearance="fill">
+            <input matInput type="password" placeholder="Enter password" formControlName="password">
+          </mat-form-field>
+          <mat-form-field class="col-sm-12" appearance="fill">
+            <input matInput type="password" placeholder="Confirm password" formControlName="confirmPassword">
+          </mat-form-field>
+          <div class="col-sm-12 text-center">
+            <button mat-button color="primary" type="submit" [disabled]="!signUpForm.valid">Sign-Up</button>
+          </div>
+        </form>
       </div>
-    </form>
+      <div class="col-sm-6 m25-top">
+        <form [formGroup]="loginForm" (ngSubmit)="login(loginForm)">
+          <mat-form-field class="col-sm-12" appearance="fill">
+            <input matInput placeholder="Enter your email" formControlName="username">
+          </mat-form-field>
+          <mat-form-field class="col-sm-12" appearance="fill">
+            <input matInput type="password" placeholder="Enter password" formControlName="password">
+          </mat-form-field>
+          <div class="col-sm-12 text-center">
+            <button mat-button color="primary" type="submit" [disabled]="!loginForm.valid">Login</button>
+          </div>
+        </form>
+      </div>
+    </div>
     <div class="clearfix"></div>
   </mat-card>
 </div>
